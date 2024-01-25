@@ -44,8 +44,13 @@ public class Dialog : Gtk.Dialog {
         });
         image_button.clicked.connect(show_select_avatar);
         alias_hybrid.entry.changed.connect(() => { selected_account.alias = alias_hybrid.text; });
-        password_hybrid.entry.changed.connect(() => { selected_account.password = password_hybrid.text; });
-        password_change_btn.clicked.connect(show_change_psswd_dialog);
+        password_hybrid.entry.changed.connect(() => {
+            string? pw_buffer;
+            pw_buffer = password_hybrid.text;
+            if (pw_buffer != null && pw_buffer.length > 0 && pw_buffer != "************") {
+              selected_account.password = pw_buffer;
+            }
+        });
 
         Util.LabelHybridGroup label_hybrid_group = new Util.LabelHybridGroup();
         label_hybrid_group.add(alias_hybrid);
