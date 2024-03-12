@@ -49,6 +49,7 @@ prepare()
        mingw64/mingw-w64-x86_64-gpgme \
        mingw64/mingw-w64-x86_64-fontconfig \
        mingw64/mingw-w64-x86_64-iso-codes \
+       mingw64/mingw-w64-x86_64-gstreamer \
        mingw64/mingw-w64-x86_64-gst-plugins-bad \
        mingw64/mingw-w64-x86_64-gst-plugins-good \
        mingw64/mingw-w64-x86_64-gst-plugins-base \
