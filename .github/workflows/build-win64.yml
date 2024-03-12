@@ -4,29 +4,23 @@ on: [pull_request, push]
 jobs:
   build:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v3
       - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
           update: true
+          install: git
+      - run: git config --global core.autocrlf input
+      - uses: actions/checkout@v4
       - name: Build Dino
         run: |
-          ./build-win64.sh --prepare
-          ./build-win64.sh
+          msys2 -c './build-win64.sh --prepare'
+          msys2 -c './build-win64.sh'
       - name: Build Dino Installer
         run: |
-          ./build-win64.sh --build-installer
-      - name: Get Dino Installer
-        uses: actions/upload-artifact@v3
+          msys2 -c './build-win64.sh --build-installer'
+      - name: Upload Dino Installer
+        uses: actions/upload-artifact@v4
         with:
-          name: windows-installer
+          name: dino-installer
           path: windows-installer/dino-installer.exe
-      - name: Get Dino distribution
-        uses: actions/upload-artifact@v3
-        with:
-          name: win64-dist
-          path: windows-installer/win64-dist
