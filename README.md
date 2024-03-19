@@ -91,7 +91,7 @@ We also recognise the previous efforts of [LAGonauta](https://github.com/LAGonau
 
 License
 -------
-    Dino+, a modern XMPP/Jabber client software, based on [Dino](https://github.com/dino/dino/)
+    Dino+, a modern XMPP/Jabber client software based on Dino
     Copyright (C) 2016-2023 Dino contributors
     Copyright (C) 2024 Dino+ contributors
 
