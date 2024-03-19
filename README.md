@@ -8,7 +8,7 @@ Project description
 ------------
 Dino+ is a fork of [Dino](https://github.com/dino/dino), a modern XMPP/Jabber client written in Vala using GTK+, which includes a few relatively minor but important quality-of-life features. 
 
-It was created due to upstream project's maintainers being seemingly unwilling with accepting PRs from the community. As of March 2024, there are over 50 PRs pending, most of which are silently ignored.
+It was created due to upstream project's maintainers being seemingly unwilling to accept PRs from the community. As of March 2024, there are over 50 PRs pending, most of which are silently ignored.
 
 Some of the features that Dino+ implements:
 
