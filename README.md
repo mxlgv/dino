@@ -35,7 +35,7 @@ We only support 64 bit platforms.
 
 Installation
 ------------
-Have a look at our [releases]([https://github.com/dino/dino/wiki/Distribution-Packages](https://github.com/mxlgv/dino/releases)).
+Have a look at our [releases](https://github.com/mxlgv/dino/releases).
 
 Build on Linux
 -----
