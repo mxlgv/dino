@@ -9,4 +9,7 @@ gschemas.compiled
 windows-installer/win64-dist/
 *.exe
 *.dll
+*.flatpak
+*.AppImage
 .flatpak-builder
+linux-distributives
