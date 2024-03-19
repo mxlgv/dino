@@ -16,11 +16,21 @@ jobs:
         run: |
           msys2 -c './build-win64.sh --prepare'
           msys2 -c './build-win64.sh'
-      - name: Build Dino Installer
+      - name: Build Dino installer
         run: |
           msys2 -c './build-win64.sh --build-installer'
-      - name: Upload Dino Installer
+      - name: Upload Dino installer
         uses: actions/upload-artifact@v4
         with:
           name: dino-installer
           path: windows-installer/dino-installer.exe
+      - name: Release Dino installer
+        if: github.ref == 'refs/heads/master-night-build' && github.event_name == 'push'
+        uses: svenstaro/upload-release-action@2.9.0
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: windows-installer/dino-installer.exe
+          asset_name: dino-installer.exe
+          tag: ${{ github.ref }}
+          overwrite: true
+          release_name: Dino
