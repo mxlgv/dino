@@ -262,12 +262,14 @@ public class MucManager : StreamInteractionModule, Object {
     public Gee.List<Jid>? get_occupants(Jid jid, Account account) {
         if (is_groupchat(jid, account)) {
             Gee.List<Jid> ret = new ArrayList<Jid>(Jid.equals_func);
-            Gee.List<Jid>? full_jids = stream_interactor.get_module(PresenceManager.IDENTITY).get_full_jids(jid, account);
-            if (full_jids != null) {
-                ret.add_all(full_jids);
+//            Gee.List<Jid>? full_jids = stream_interactor.get_module(PresenceManager.IDENTITY).get_full_jids(jid, account);
+            Gee.List<Jid>? off_jids = get_offline_members(jid, account);
+//            if (full_jids != null) {
+//                ret.add_all(full_jids);
+                ret.add_all(off_jids);
                 // Remove eventual presence from bare jid
-                ret.remove(jid);
-            }
+                //ret.remove(jid);
+//            }
             return ret;
         }
         return null;
