@@ -21,9 +21,9 @@ fatal()
 get_flatpak_dependencies()
 {
     msg "Installing Flatpak dependencies..."
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak install flathub org.gnome.Sdk//44
-    flatpak install flathub org.gnome.Platform//44
+    flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak install --user -y flathub org.gnome.Sdk//44
+    flatpak  install --user -y flathub org.gnome.Platform//44
     msg "Flatpak dependencies installed"
 }
 
