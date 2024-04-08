@@ -10,10 +10,7 @@ public class ListRow : Object {
     private Grid main_grid;
     private AvatarPicture picture;
     public Label name_label;
-    public ColorButton status_button;
-    public Gdk.RGBA Red_color;
-    public Gdk.RGBA Green;
-
+    public Image status_image;
     public Conversation? conversation;
     public Jid? jid;
 
@@ -22,10 +19,7 @@ public class ListRow : Object {
         main_grid = (Grid) builder.get_object("main_grid");
         picture = (AvatarPicture) builder.get_object("picture");
         name_label = (Label) builder.get_object("name_label");
-        status_button = (ColorButton) builder.get_object("status_button");
-        status_button.set_sensitive(false);
-        Red_color = Gdk.RGBA() { red = 1.0f, green = 0f, blue = 0f, alpha = 1.0f};
-        Green = Gdk.RGBA() { red = 0f, green = 1.0f, blue = 0f, alpha = 1.0f};
+        status_image = (Image) builder.get_object("status_image");
         main_grid.set_column_spacing(10);
         main_grid.set_column_homogeneous(false);
         main_grid.set_baseline_row(1);
@@ -49,11 +43,11 @@ public class ListRow : Object {
     }
 
     public void set_online() {
-        status_button.set_rgba(Green);
+        status_image.icon_name = "dino-status-online";
     }
 
     public void set_offline() {
-        status_button.set_rgba(Red_color);
+        status_image.icon_name = "dino-status-offline";
     }
 }
 

@@ -27,7 +27,8 @@
             </object>
         </child>
         <child>
-            <object class="GtkColorButton" id="status_button">
+            <object class="GtkImage" id="status_image">
+                <property name="pixel-size">12</property>
                 <layout>
                     <property name="column">2</property>
                     <property name="row">0</property>
