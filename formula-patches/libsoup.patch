@@ -1,0 +1,13 @@
+diff --git a/configure b/configure
+index ab22d840..286ab122 100755
+--- a/configure
++++ b/configure
+@@ -20,7 +20,7 @@ BUILD_TYPE=Debug
+ DISABLE_FAST_VAPI=
+ LIB_SUFFIX=
+ NO_DEBUG=
+-USE_SOUP3=
++USE_SOUP3=1
+ 
+ EXEC_PREFIX=
+ BINDIR=
