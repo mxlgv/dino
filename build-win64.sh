@@ -46,6 +46,16 @@ download_gtk4_git()
     pacman -U --needed --noconfirm "$gtk_pkg" "$gtk_gstreamer_pkg"
 }
 
+download_vala()
+{
+    url="https://repo.msys2.org/mingw/mingw64"
+    vala_pkg="mingw-w64-x86_64-vala-0.56.16-1-any.pkg.tar.zst"
+
+    curl -L -o "$vala_pkg" "$url/$vala_pkg"
+
+    pacman -U --needed --noconfirm "$vala_pkg"
+}
+
 prepare()
 {
     msg "Installing MINGW64 build dependencies"
@@ -59,7 +69,6 @@ prepare()
        mingw64/mingw-w64-x86_64-openssl \
        mingw64/mingw-w64-x86_64-libgcrypt \
        mingw64/mingw-w64-x86_64-libgee \
-       mingw64/mingw-w64-x86_64-vala \
        mingw64/mingw-w64-x86_64-gsettings-desktop-schemas \
        mingw64/mingw-w64-x86_64-qrencode \
        mingw64/mingw-w64-x86_64-ntldd-git \
@@ -79,6 +88,10 @@ prepare()
        make \
        unzip \
        curl
+
+    msg "Downloading specific version of vala"
+    download_vala
+    msg "Successfully installed!"
 
     msg "Downloading and install git versions of gtk4 and gtk4-media-gstreamer packages"
     download_gtk4_git
