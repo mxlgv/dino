@@ -1040,6 +1040,14 @@ msgstr "Превращать смайлы в эмодзи"
 msgid "Check spelling"
 msgstr "Проверка орфографии"
 
+#: main/data/settings_dialog.ui:148
+msgid "Select language"
+msgstr "Выбор языка"
+
+#: main/data/settings_dialog.ui:149
+msgid "Application restart required"
+msgstr "Требуется перезапуск приложения"
+
 #: main/data/im.dino.Dino.appdata.xml.in:7
 msgid "Modern XMPP Chat Client"
 msgstr "Современный XMPP клиент"

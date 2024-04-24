@@ -34,6 +34,10 @@ public interface Application : GLib.Application {
         this.settings = new Dino.Entities.Settings.from_db(db);
         this.stream_interactor = new StreamInteractor(db);
 
+#if ENABLE_SELECT_LANG
+        Environment.set_variable("LANGUAGE", settings.ui_language, true);
+#endif
+
         MessageProcessor.start(stream_interactor, db);
         MessageStorage.start(stream_interactor, db);
         PresenceManager.start(stream_interactor);

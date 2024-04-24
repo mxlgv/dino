@@ -14,6 +14,7 @@ include(CTest)
 
 option(PLUGIN_RTP_WEBRTC_AUDIO_PROCESSING "Use WebRTC audio processing" ON)
 option(WITH_WASAPI "Use wasapi instead of directsound on windows" ON)
+option(ENABLE_SELECT_LANG "Add language change to settings" OFF)
 
 # https://gitlab.kitware.com/cmake/cmake/-/issues/19804
 if (WIN32)
@@ -195,7 +196,11 @@ endif (NOT NO_DEBUG)
 if (WIN32)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_POSIX_C_SOURCE=1")
     set(CMAKE_VALA_FLAGS "${CMAKE_VALA_FLAGS} --define=_WIN32")
-endif(WIN32)
+endif (WIN32)
+
+if (ENABLE_SELECT_LANG)
+    set(CMAKE_VALA_FLAGS "${CMAKE_VALA_FLAGS} --define=ENABLE_SELECT_LANG")
+endif (ENABLE_SELECT_LANG)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})

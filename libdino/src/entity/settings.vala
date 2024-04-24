@@ -15,6 +15,7 @@ public class Settings : Object {
         default_encryption = col_to_encryption_or_default("default_encryption", Encryption.UNKNOWN);
         send_button = col_to_bool_or_default("send_button", false);
         enter_newline = col_to_bool_or_default("enter_newline", false);
+        ui_language_ = col_to_string_or_default("ui_language", "en");
     }
 
     private bool col_to_bool_or_default(string key, bool def) {
@@ -26,6 +27,12 @@ public class Settings : Object {
         var sval = db.settings.value;
         string? val = db.settings.select({sval}).with(db.settings.key, "=", key)[sval];
         return val != null ? Encryption.parse(val) : def;
+    }
+
+    private string col_to_string_or_default(string key, string def) {
+        var sval = db.settings.value;
+        string? val = db.settings.select({sval}).with(db.settings.key, "=", key)[sval];
+        return val != null ? val : def;
     }
 
     private bool send_typing_;
@@ -126,6 +133,19 @@ public class Settings : Object {
                 .value(db.settings.value, value.to_string())
                 .perform();
             enter_newline_ = value;
+        }
+    }
+
+    private string ui_language_;
+    public string ui_language {
+        get { return ui_language_; }
+        set {
+            string valstr = value.to_string();
+            db.settings.upsert()
+                .value(db.settings.key, "ui_language", true)
+                .value(db.settings.value, valstr)
+                .perform();
+            ui_language_ = value;
         }
     }
 }
