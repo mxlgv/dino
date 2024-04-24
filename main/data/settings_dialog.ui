@@ -140,6 +140,25 @@
                         </child>
                     </object>
                 </child>
+                <child>
+                    <object class="AdwPreferencesGroup" id="select_lang_group">
+                        <property name="visible">False</property>
+                        <child>
+                            <object class="AdwComboRow" id="select_lang_comborow">
+                                <property name="title" translatable="yes">Select language</property>
+                                <property name="subtitle" translatable="yes">Application restart required</property>
+                                <property name="model">
+                                    <object class="GtkStringList" id="select_lang_list">
+                                    <items>
+                                        <item>English</item>
+                                        <item>Русский</item>
+                                    </items>
+                                    </object>
+                                </property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
             </object>
         </child>
     </template>

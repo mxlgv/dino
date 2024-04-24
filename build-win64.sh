@@ -94,7 +94,7 @@ prepare()
 configure_cmake()
 {
     msg "Running configuration for Windows"
-    ./configure --program-prefix="$DIST_DIR" --no-debug --release --disable-fast-vapi --with-libsoup3 --with-tests
+    ./configure --program-prefix="$DIST_DIR" --no-debug --release --disable-fast-vapi --with-libsoup3 --with-tests --enable-select-lang
     msg "Configured!"
 }
 
@@ -125,6 +125,7 @@ configure_meson()
     meson setup ${cmd} --prefix "$DIST_DIR" \
 	    -D crypto-backend=${encr} \
 	    -D plugin-ice=enabled \
+        -D select-lang=enabled \
 	    $PROJ_DIR $BUILD_DIR
 }
 

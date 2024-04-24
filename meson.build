@@ -24,6 +24,10 @@ else
     endforeach
 endif
 
+if get_option('select-lang').allowed()
+    add_project_arguments('-D', 'ENABLE_SELECT_LANG', language: 'vala')
+endif
+
 if get_option('crypto-backend') == 'auto'
     # Prefer libgcrypt/gnutls over openssl because glib-networking is usually
     # built with gnutls anyway.

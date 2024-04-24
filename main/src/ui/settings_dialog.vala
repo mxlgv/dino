@@ -15,6 +15,10 @@ class SettingsDialog : Adw.PreferencesWindow {
     [GtkChild] private unowned CheckButton encryption_radio_openpgp;
     [GtkChild] private unowned Switch send_button_switch;
     [GtkChild] private unowned Switch enter_newline_switch;
+#if ENABLE_SELECT_LANG
+    [GtkChild] private unowned Adw.ComboRow select_lang_comborow;
+    [GtkChild] private unowned Adw.PreferencesGroup select_lang_group;
+#endif
 
     Dino.Entities.Settings settings = Dino.Application.get_default().settings;
 
@@ -65,6 +69,21 @@ class SettingsDialog : Adw.PreferencesWindow {
                 enter_newline_switch.active = visible;
             }
         });
+
+#if ENABLE_SELECT_LANG
+        var lang_short_list = new Gee.ArrayList<string>();
+        lang_short_list.add("en");
+        lang_short_list.add("ru");
+
+        select_lang_comborow.set_selected(lang_short_list.index_of(settings.ui_language));
+
+        select_lang_comborow.notify["selected-item"].connect(() => {
+            settings.ui_language = lang_short_list.get((int)select_lang_comborow.get_selected());
+        });
+
+        select_lang_group.visible = true;
+#endif
+
     }
 }
 

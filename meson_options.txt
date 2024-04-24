@@ -17,3 +17,5 @@ option('plugin-rtp-webrtc-audio-processing', type: 'feature', description: 'Voic
 
 option('use-soup2', type: 'boolean', value: false, description: 'Use libsoup version 2 instead of 3')
 option('with-wasapi', type: 'boolean', value: true, description: 'Use wasapi insted of directsound on windows')
+
+option('select-lang', type: 'feature', value: 'disabled', description: 'Enable language change in settings')
