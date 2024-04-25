@@ -16,6 +16,10 @@ class SettingsDialog : Adw.PreferencesWindow {
     [GtkChild] private unowned Switch send_button_switch;
     [GtkChild] private unowned Switch enter_newline_switch;
     [GtkChild] private unowned Switch dark_theme;
+    [GtkChild] private unowned CheckButton scale_small;
+    [GtkChild] private unowned CheckButton scale_medium;
+    [GtkChild] private unowned CheckButton scale_large;
+    [GtkChild] private unowned CheckButton scale_xlarge;
 
     Dino.Entities.Settings settings = Dino.Application.get_default().settings;
 
@@ -29,6 +33,11 @@ class SettingsDialog : Adw.PreferencesWindow {
         encryption_radio_undecided.active = settings.default_encryption == Encryption.UNKNOWN;
         encryption_radio_omemo.active = settings.default_encryption == Encryption.OMEMO;
         encryption_radio_openpgp.active = settings.default_encryption == Encryption.PGP;
+
+        scale_small.active = settings.interface_scale == InterfaceScale.SMALL;
+        scale_medium.active = settings.interface_scale == InterfaceScale.MEDIUM;
+        scale_large.active = settings.interface_scale == InterfaceScale.LARGE;
+        scale_xlarge.active = settings.interface_scale == InterfaceScale.EXTRA_LARGE;
 
         send_button_switch.active = settings.send_button;
         enter_newline_switch.active = settings.enter_newline;
@@ -56,6 +65,30 @@ class SettingsDialog : Adw.PreferencesWindow {
         encryption_radio_openpgp.notify["active"].connect(() => {
             if (encryption_radio_openpgp.active) {
                 settings.default_encryption = Encryption.PGP;
+            }
+        });
+
+        scale_small.notify["active"].connect(() => {
+            if (scale_small.active) {
+                settings.interface_scale = InterfaceScale.SMALL;
+            }
+        });
+
+        scale_medium.notify["active"].connect(() => {
+            if (scale_medium.active) {
+                settings.interface_scale = InterfaceScale.MEDIUM;
+            }
+        });
+
+        scale_large.notify["active"].connect(() => {
+            if (scale_large.active) {
+                settings.interface_scale = InterfaceScale.LARGE;
+            }
+        });
+
+        scale_xlarge.notify["active"].connect(() => {
+            if (scale_xlarge.active) {
+                settings.interface_scale = InterfaceScale.EXTRA_LARGE;
             }
         });
 

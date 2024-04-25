@@ -39,6 +39,11 @@ public class ConversationSelectorRow : ListBoxRow {
         this.conversation = conversation;
         this.stream_interactor = stream_interactor;
 
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        settings.update_interface_scale.connect(() => {
+            content_item_received();
+        });
+
         switch (conversation.type_) {
             case Conversation.Type.CHAT:
                 stream_interactor.get_module(RosterManager.IDENTITY).updated_roster_item.connect((account, jid, roster_item) => {
@@ -103,6 +108,13 @@ public class ConversationSelectorRow : ListBoxRow {
         content_item_received();
     }
 
+    private AttrList get_scale_attr() {
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        Pango.AttrList attr_list = new Pango.AttrList();
+        attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
+        return attr_list;
+    }
+
     public void update() {
         update_time_label();
     }
@@ -129,6 +141,10 @@ public class ConversationSelectorRow : ListBoxRow {
 
     protected void update_name_label() {
         name_label.label = Util.get_conversation_display_name(stream_interactor, conversation);
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        Pango.AttrList attr_list = new Pango.AttrList();
+        attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
+        name_label.set_attributes(attr_list);
     }
 
     private void update_pinned_icon() {
@@ -139,6 +155,10 @@ public class ConversationSelectorRow : ListBoxRow {
         if (last_content_item != null) {
             time_label.visible = true;
             time_label.label = get_relative_time(last_content_item.time.to_local());
+            Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+            Pango.AttrList attr_list = new Pango.AttrList();
+            attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
+            time_label.set_attributes(attr_list);
         }
     }
 
@@ -207,8 +227,13 @@ public class ConversationSelectorRow : ListBoxRow {
                     message_label.label = call.direction == Call.DIRECTION_OUTGOING ? _("Outgoing call") : _("Incoming call");
                     break;
             }
+            Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+            Pango.AttrList attr_list = new Pango.AttrList();
+            attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
             nick_label.visible = true;
+            nick_label.set_attributes(attr_list);
             message_label.visible = true;
+            message_label.set_attributes(attr_list);
         }
     }
 
@@ -247,6 +272,7 @@ public class ConversationSelectorRow : ListBoxRow {
         } else {
             unread_count_label.label = num_unread.to_string();
             unread_count_label.visible = true;
+            unread_count_label.set_attributes(get_scale_attr());
 
             if (conversation.get_notification_setting(stream_interactor) == Conversation.NotifySetting.ON) {
                 unread_count_label.add_css_class("unread-count-notify");

@@ -15,7 +15,7 @@
                         <property name="margin-end">14</property>
                         <child>
                             <object class="DinoUiAvatarPicture" id="picture">
-                                <property name="height-request">35</property>
+                                <property name="height-request">35</property> <!-- Conversation list avatar size -->
                                 <property name="width-request">35</property>
                                 <property name="valign">center</property>
                             </object>
@@ -42,7 +42,7 @@
                                                 <property name="hexpand">False</property>
                                                 <property name="xalign">1</property>
                                                 <attributes>
-                                                    <attribute name="scale" value="0.7"/>
+                                                    <attribute name="scale" value="0.7"/> <!-- Conversation list last message time -->
                                                 </attributes>
                                             </object>
                                         </child>
@@ -63,7 +63,7 @@
                                                 </style>
                                                 <attributes>
                                                     <!--<attribute name="weight" value="bold"/>-->
-                                                    <attribute name="scale" value="0.8"/>
+                                                    <attribute name="scale" value="0.8"/> <!-- Converstion list last message sender name -->
                                                 </attributes>
                                             </object>
                                         </child>
@@ -76,7 +76,7 @@
                                                 <property name="valign">end</property>
                                                 <property name="xalign">0</property>
                                                 <attributes>
-                                                    <attribute name="scale" value="0.8"/>
+                                                    <attribute name="scale" value="0.8"/> <!-- Conversation list last message text -->
                                                 </attributes>
                                             </object>
                                         </child>
@@ -91,7 +91,7 @@
                                                         <property name="visible">False</property>
                                                         <property name="xalign">0.5</property>
                                                         <attributes>
-                                                            <attribute name="scale" value="0.6"/>
+                                                            <attribute name="scale" value="0.6"/> <!-- Conversation list unread message -->
                                                             <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
                                                         </attributes>
                                                     </object>

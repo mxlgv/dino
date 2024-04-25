@@ -157,6 +157,59 @@
                         </child>
                     </object>
                 </child>
+                <child>
+                    <object class="AdwPreferencesGroup">
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">Interface scale</property>
+                                <child>
+                                    <object class="GtkBox" id="interface_scale">
+                                        <child>
+                                            <object class="GtkCheckButton" id="scale_small">
+                                                <property name="label" translatable="yes">Small</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="active">False</property>
+                                                <property name="group">scale_small</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkCheckButton" id="scale_medium">
+                                                <property name="label" translatable="yes">Medium</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="active">False</property>
+                                                <property name="group">scale_small</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkCheckButton" id="scale_large">
+                                                <property name="label" translatable="yes">Large</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="active">False</property>
+                                                <property name="group">scale_small</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkCheckButton" id="scale_xlarge">
+                                                <property name="label" translatable="yes">Extra Large</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="active">False</property>
+                                                <property name="group">scale_small</property>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
             </object>
         </child>
     </template>
