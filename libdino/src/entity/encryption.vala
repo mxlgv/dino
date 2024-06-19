@@ -34,4 +34,61 @@ namespace Dino.Entities {
         }
     }
 
+    public enum InterfaceScale {
+        NONE,
+        SMALL,
+        MEDIUM,
+        LARGE,
+        EXTRA_LARGE;
+
+        public bool is_some() {
+            return this != NONE;
+        }
+
+        public static InterfaceScale parse(string str) {
+            switch (str) {
+                case "DINO_ENTITIES_INTERFACE_SCALE_SMALL":
+                    return SMALL;
+                case "DINO_ENTITIES_INTERFACE_SCALE_MEDIUM":
+                    return MEDIUM;
+                case "DINO_ENTITIES_INTERFACE_SCALE_LARGE":
+                    return LARGE;
+                case "DINO_ENTITIES_INTERFACE_SCALE_EXTRA_LARGE":
+                    return EXTRA_LARGE;
+                default:
+                    return NONE;
+            }
+        }
+
+        public static double to_double(InterfaceScale val) {
+            switch (val) {
+                case InterfaceScale.SMALL:
+                    return 0.6;
+                case InterfaceScale.MEDIUM:
+                    return 0.8;
+                case InterfaceScale.LARGE:
+                    return 1;
+                case InterfaceScale.EXTRA_LARGE:
+                    return 1.5;
+                default:
+                    return 0.8;
+            }
+        }
+
+        public static double to_css_pt(InterfaceScale val) {
+            switch (val) {
+                case InterfaceScale.SMALL:
+                    return 8;
+                case InterfaceScale.MEDIUM:
+                    return 10;
+                case InterfaceScale.LARGE:
+                    return 12;
+                case InterfaceScale.EXTRA_LARGE:
+                    return 16;
+                default:
+                    return 10;
+            }
+        }
+    }
+
 }

@@ -281,7 +281,10 @@ public class MessageItemEditMode : Box {
     [GtkChild] public unowned Frame frame;
 
     construct {
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        
         Util.force_css(frame, "* { border-radius: 3px; padding: 0px 7px; }");
+        Util.force_css(frame, " .dino-chatinput { font-size: %spt; }".printf(InterfaceScale.to_css_pt(settings.interface_scale).to_string()));
 
         EmojiChooser chooser = new EmojiChooser();
         chooser.emoji_picked.connect((emoji) => {
@@ -295,6 +298,14 @@ public class MessageItemEditMode : Box {
         send_button.clicked.connect(() => send());
         chat_text_view.cancel_input.connect(() => cancelled());
         chat_text_view.send_text.connect(() => send());
+        
+        //  Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        //  settings.update_interface_scale.connect(() => {
+        //      Pango.AttrList attr_list = new Pango.AttrList();
+        //      attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
+        //      chat_text_view.text_view.override_font(Pango.font_description_from_string('DejaVu Sans Mono 12'));
+        //  });
+        
     }
 
     private void on_text_view_changed() {
