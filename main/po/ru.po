@@ -563,7 +563,7 @@ msgstr "Уведомления"
 
 #: main/src/ui/contact_details/settings_provider.vala:55
 msgid "Pin conversation"
-msgstr ""
+msgstr "Закрепить беседу"
 
 #: main/src/ui/contact_details/settings_provider.vala:55
 msgid "Pins the conversation to the top of the conversation list"
@@ -826,16 +826,16 @@ msgstr "Прочтите %s, чтобы узнать о процессе авт�
 
 #: main/src/ui/conversation_content_view/message_widget.vala:213
 msgid "Edit message"
-msgstr ""
+msgstr "Редактировать сообщение"
 
 #: main/src/ui/conversation_content_view/reactions_widget.vala:102
 msgid "You"
-msgstr ""
+msgstr "Вы"
 
 #: main/src/ui/conversation_content_view/reactions_widget.vala:128
 #: main/src/ui/conversation_content_view/item_actions.vala:8
 msgid "Add reaction"
-msgstr ""
+msgstr "Добавить реакцию"
 
 #: main/src/ui/conversation_content_view/file_image_widget.vala:53
 #: main/src/ui/conversation_content_view/file_default_widget.vala:57
@@ -947,7 +947,7 @@ msgstr "несколько секунд"
 
 #: main/src/ui/conversation_content_view/conversation_item_skeleton.vala:191
 msgid "Delivered"
-msgstr ""
+msgstr "Доставленo"
 
 #: main/src/ui/conversation_content_view/conversation_item_skeleton.vala:195
 msgid "Read"
@@ -959,15 +959,15 @@ msgstr "Этот контакт хочет добавить вас в свой �
 
 #: main/src/ui/conversation_content_view/item_actions.vala:21
 msgid "This conversation does not support reactions."
-msgstr ""
+msgstr "Этот разговор не поддерживает реакции."
 
 #: main/src/ui/conversation_content_view/item_actions.vala:33
 msgid "Reply"
-msgstr ""
+msgstr "Ответить"
 
 #: main/src/ui/conversation_content_view/item_actions.vala:43
 msgid "This conversation does not support replies."
-msgstr ""
+msgstr "Этот разговор не поддерживает ответы"
 
 #: main/src/ui/conversation_content_view/file_default_widget.vala:64
 #, c-format
@@ -1006,7 +1006,7 @@ msgstr "Тут пустовато"
 
 #: main/data/unified_main_content.ui:47
 msgid "Click + to start a chat or join a channel"
-msgstr ""
+msgstr "Нажмите +, чтобы начать чат или присоединиться к каналу"
 
 #: main/data/add_conversation/conference_details_fragment.ui:20
 #: main/data/add_conversation/add_groupchat_dialog.ui:40
