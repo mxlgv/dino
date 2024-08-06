@@ -61,6 +61,12 @@ public class ConversationItemSkeleton : Plugins.ConversationItemWidgetInterface,
             set_widget(widget, Plugins.WidgetType.GTK4, 2);
         }
 
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        settings.update_interface_scale.connect(() => {
+            update_name_label();
+            update_time();
+        });
+
         if (item.requires_header) {
             // TODO: For MUC messags, use real jid from message if known
             avatar_picture.model = new ViewModel.CompatAvatarPictureModel(stream_interactor).add_participant(conversation, item.jid);
@@ -174,7 +180,12 @@ public class ConversationItemSkeleton : Plugins.ConversationItemWidgetInterface,
     }
 
     private void update_time() {
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        Pango.AttrList attr_list = new Pango.AttrList();
+        attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
+        
         time_label.label = get_relative_time(item.time.to_local()).to_string();
+        time_label.set_attributes(attr_list);
 
         time_update_timeout = Timeout.add_seconds((int) get_next_time_change(item.time), () => {
             if (this.main_grid.parent == null) return false;
@@ -184,7 +195,11 @@ public class ConversationItemSkeleton : Plugins.ConversationItemWidgetInterface,
     }
 
     private void update_name_label() {
+        Dino.Entities.Settings settings = Dino.Application.get_default().settings;
+        Pango.AttrList attr_list = new Pango.AttrList();
+        attr_list.insert(Pango.attr_scale_new(InterfaceScale.to_double(settings.interface_scale)));
         name_label.label = Util.get_participant_display_name(stream_interactor, conversation, item.jid, true);
+        name_label.set_attributes(attr_list);
     }
 
     private void update_received_mark() {
