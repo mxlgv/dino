@@ -73,6 +73,9 @@ public class FileImageWidget : Box {
             image_overlay_toolbar.visible = false;
         });
 
+        // Set tooltip to display the file name on hover
+        image.set_tooltip_text(file_name);
+
         this.append(overlay);
     }
 }
