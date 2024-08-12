@@ -46,6 +46,15 @@ public class FileManager : StreamInteractionModule, Object {
         return ret;
     }
 
+    private string sanitize_filename(string filename) {
+#if _WIN32
+        GLib.Regex regex = new GLib.Regex("[<>:\"/\\|?*]");
+#else
+        GLib.Regex regex = new GLib.Regex("[/]");
+#endif
+        return regex.replace(filename, -1, 0, "_");
+    }
+
     public async void send_file(File file, Conversation conversation) {
         FileTransfer file_transfer = new FileTransfer();
         file_transfer.account = conversation.account;
@@ -243,7 +252,7 @@ public class FileManager : StreamInteractionModule, Object {
             }
 
             // Save file
-            string filename = Random.next_int().to_string("%x") + "_" + file_transfer.file_name;
+            string filename = Random.next_int().to_string("%x") + "_" + sanitize_filename(file_transfer.file_name);
             File file = File.new_for_path(Path.build_filename(get_storage_dir(), filename));
 
             OutputStream os = file.create(FileCreateFlags.REPLACE_DESTINATION);
@@ -332,7 +341,7 @@ public class FileManager : StreamInteractionModule, Object {
 
     private async void save_file(FileTransfer file_transfer) throws FileSendError {
         try {
-            string filename = Random.next_int().to_string("%x") + "_" + file_transfer.file_name;
+            string filename = Random.next_int().to_string("%x") + "_" + sanitize_filename(file_transfer.file_name);
             File file = File.new_for_path(Path.build_filename(get_storage_dir(), filename));
             OutputStream os = file.create(FileCreateFlags.REPLACE_DESTINATION);
             yield os.splice_async(file_transfer.input_stream, OutputStreamSpliceFlags.CLOSE_SOURCE|OutputStreamSpliceFlags.CLOSE_TARGET);
