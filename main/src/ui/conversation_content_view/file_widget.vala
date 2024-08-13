@@ -90,7 +90,8 @@ public class FileWidget : SizeRequestBox {
 
     private async void update_widget() {
         if (show_image() && state != State.IMAGE
-            && file_transfer.state == FileTransfer.State.COMPLETE) {
+            && file_transfer.state == FileTransfer.State.COMPLETE
+            && file_transfer.get_file().query_exists()) {
             var content_bak = content;
 
             FileImageWidget file_image_widget = null;
@@ -109,7 +110,8 @@ public class FileWidget : SizeRequestBox {
             } catch (Error e) { }
         }
 
-        if (state != State.DEFAULT) {
+        if (state != State.DEFAULT ||
+            (file_transfer.state == FileTransfer.State.COMPLETE && !file_transfer.get_file().query_exists())) {
             if (content != null) this.remove(content);
             FileDefaultWidget default_file_widget = new FileDefaultWidget();
             default_widget_controller = new FileDefaultWidgetController(default_file_widget);
@@ -176,10 +178,16 @@ public class FileWidgetController : Object {
     }
 
     private void open_file() {
-        try{
-            Dino.Util.launch_default_for_uri(file_transfer.get_file().get_uri());
-        } catch (Error err) {
-            warning("Failed to open %s - %s", file_transfer.get_file().get_uri(), err.message);
+        if (file_transfer.get_file().query_exists()) {
+            try {
+                Dino.Util.launch_default_for_uri(file_transfer.get_file().get_uri());
+            } catch (Error err) {
+                warning("Failed to open %s - %s", file_transfer.get_file().get_uri(), err.message);
+            }
+        } else {
+            warning("File %s does not exist", file_transfer.get_file().get_uri());
+            file_transfer.state = FileTransfer.State.NOT_STARTED;
+            widget.activate_action("file.download", null);
         }
     }
 
@@ -244,8 +252,12 @@ public class FileDefaultWidgetController : Object {
 
     private void update_file_info() {
         state = file_transfer.state;
+        if (state == FileTransfer.State.COMPLETE && !file_transfer.get_file().query_exists()) {
+            state = FileTransfer.State.NOT_STARTED;
+            file_transfer.state = FileTransfer.State.NOT_STARTED;
+        }
         widget.update_file_info(file_transfer.mime_type, file_transfer.transferred_bytes,
-            file_transfer.direction, file_transfer.state, file_transfer.size);
+            file_transfer.direction, state, file_transfer.size);
     }
 
     private void on_clicked() {
@@ -254,10 +266,11 @@ public class FileDefaultWidgetController : Object {
                 widget.activate_action("file.open", null);
                 break;
             case FileTransfer.State.NOT_STARTED:
+            case FileTransfer.State.FAILED:
                 widget.activate_action("file.download", null);
                 break;
             default:
-                // Clicking doesn't do anything in FAILED and IN_PROGRESS states
+                // Clicking doesn't do anything in IN_PROGRESS state
                 break;
         }
     }
