@@ -13,10 +13,13 @@ public class Settings : Object {
         convert_utf8_smileys_ = col_to_bool_or_default("convert_utf8_smileys", true);
         check_spelling = col_to_bool_or_default("check_spelling", true);
         default_encryption = col_to_encryption_or_default("default_encryption", Encryption.UNKNOWN);
+        interface_scale = col_to_interface_scale_or_default("interface_scale", InterfaceScale.MEDIUM);
         send_button = col_to_bool_or_default("send_button", false);
         enter_newline = col_to_bool_or_default("enter_newline", false);
         dark_theme = col_to_bool_or_default("dark_theme", default_dark_theme);
     }
+
+    public signal void update_interface_scale();
 
     private bool col_to_bool_or_default(string key, bool def) {
         string? val = db.settings.select({db.settings.value}).with(db.settings.key, "=", key)[db.settings.value];
@@ -27,6 +30,12 @@ public class Settings : Object {
         var sval = db.settings.value;
         string? val = db.settings.select({sval}).with(db.settings.key, "=", key)[sval];
         return val != null ? Encryption.parse(val) : def;
+    }
+
+    private InterfaceScale col_to_interface_scale_or_default(string key, InterfaceScale def) {
+        var sval = db.settings.value;
+        string? val = db.settings.select({sval}).with(db.settings.key, "=", key)[sval];
+        return val != null ? InterfaceScale.parse(val) : def;
     }
 
     private bool send_typing_;
@@ -100,6 +109,20 @@ public class Settings : Object {
                 .value(db.settings.value, valstr)
                 .perform();
             default_encryption_ = value;
+        }
+    }
+
+    private InterfaceScale interface_scale_;
+    public InterfaceScale interface_scale {
+        get { return interface_scale_; }
+        set {
+            string valstr = value.to_string();
+            db.settings.upsert()
+                .value(db.settings.key, "interface_scale", true)
+                .value(db.settings.value, valstr)
+                .perform();
+            interface_scale_ = value;
+            update_interface_scale();
         }
     }
 

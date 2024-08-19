@@ -6,7 +6,7 @@
     <property name="row-spacing">2</property>
     <child>
       <object class="DinoUiAvatarPicture" id="avatar_picture">
-        <property name="height-request">35</property>
+        <property name="height-request">35</property>  <!-- Size of aatars in conversation -->
         <property name="width-request">35</property>
         <property name="valign">start</property>
         <property name="margin-top">2</property>
@@ -23,6 +23,7 @@
         <property name="xalign">0</property>
         <property name="valign">baseline</property>
         <attributes>
+          <attribute name="scale" value="1"/> <!-- Size of nickname if conersation -->
           <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
         </attributes>
         <layout>
@@ -36,7 +37,7 @@
         <property name="xalign">0</property>
         <property name="valign">baseline</property>
         <attributes>
-          <attribute name="scale" value="0.8"/>
+          <attribute name="scale" value="0.8"/> <!-- size of message time -->
         </attributes>
         <style>
           <class name="dim-label"/>
